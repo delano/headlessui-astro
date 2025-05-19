@@ -1,0 +1,37 @@
+---
+// PopoverGroup.astro - Group component for managing multiple Popovers
+import type { PopoverGroupProps } from '../../types/popover';
+
+// Destructure props with defaults
+const {
+  as = 'div',
+  autoClose = true,
+  ...rest
+} = Astro.props as PopoverGroupProps;
+
+// Generate unique ID for accessibility
+const groupId = `headlessui-popover-group-${Math.random().toString(36).substring(2, 9)}`;
+
+// Explicitly use the HTML tag based on the as prop
+const Tag = as;
+---
+
+{as === 'div' ? (
+  <div
+    id={groupId}
+    data-headlessui-popover-group
+    data-autoclose={autoClose.toString()}
+    {...rest}
+  >
+    <slot />
+  </div>
+) : (
+  <Tag
+    id={groupId}
+    data-headlessui-popover-group
+    data-autoclose={autoClose.toString()}
+    {...rest}
+  >
+    <slot />
+  </Tag>
+)}

@@ -1,0 +1,21 @@
+---
+// DialogPanel.astro - Independent implementation
+import type { DialogPanelProps } from '../../types/dialog';
+
+// Destructure props with defaults
+const { 
+  as = 'div',
+  focus = false,
+  ...rest 
+} = Astro.props as DialogPanelProps;
+
+// Determine the element to render
+const Element = as;
+---
+
+<Element
+  data-headlessui-dialog-panel
+  {...rest}
+>
+  <slot />
+</Element>

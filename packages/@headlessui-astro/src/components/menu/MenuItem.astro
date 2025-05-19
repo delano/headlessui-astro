@@ -1,0 +1,33 @@
+---
+// MenuItem.astro - Independent implementation
+import type { MenuItemProps } from '../../types/menu';
+
+// Destructure props with defaults
+const {
+  as = 'button',
+  disabled = false,
+  value,
+  ...rest
+} = Astro.props as MenuItemProps;
+
+// Determine the element to render
+const Element = as;
+
+// Generate unique ID for accessibility
+const menuItemId = `headlessui-menu-item-${Math.random().toString(36).substring(2, 9)}`;
+---
+
+<Element
+  id={menuItemId}
+  data-headlessui-menu-item
+  data-active="false"
+  data-disabled={disabled.toString()}
+  role="menuitem"
+  tabindex="-1"
+  aria-disabled={disabled.toString()}
+  data-value={value !== undefined ? JSON.stringify(value) : undefined}
+  {...(disabled ? { disabled } : {})}
+  {...rest}
+>
+  <slot />
+</Element>

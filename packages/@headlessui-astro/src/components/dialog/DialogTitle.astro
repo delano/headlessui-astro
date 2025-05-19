@@ -1,0 +1,25 @@
+---
+// DialogTitle.astro - Independent implementation
+import type { DialogTitleProps } from '../../types/dialog';
+
+// Destructure props with defaults
+const { 
+  as = 'h2',
+  id,
+  ...rest 
+} = Astro.props as DialogTitleProps;
+
+// Generate ID if not provided
+const titleId = id || `headlessui-dialog-title-${Math.random().toString(36).substring(2, 9)}`;
+
+// Determine the element to render
+const Element = as;
+---
+
+<Element
+  id={titleId}
+  data-headlessui-dialog-title
+  {...rest}
+>
+  <slot />
+</Element>

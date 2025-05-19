@@ -1,0 +1,25 @@
+---
+// DialogDescription.astro - Independent implementation
+import type { DialogDescriptionProps } from '../../types/dialog';
+
+// Destructure props with defaults
+const { 
+  as = 'p',
+  id,
+  ...rest 
+} = Astro.props as DialogDescriptionProps;
+
+// Generate ID if not provided
+const descriptionId = id || `headlessui-dialog-description-${Math.random().toString(36).substring(2, 9)}`;
+
+// Determine the element to render
+const Element = as;
+---
+
+<Element
+  id={descriptionId}
+  data-headlessui-dialog-description
+  {...rest}
+>
+  <slot />
+</Element>
